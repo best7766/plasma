@@ -7,15 +7,7 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
- 
-RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
-    apt-get update -y && \ 
-    apt-get install -yqq locales  && \ 
-    echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
-    echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
-    echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
-    locale-gen en_GB.UTF-8 && \ 
-    update-locale LANG=en_GB.UTF-8  && \ 
+RUN apt-get update -y && \ 
     apt-get install -yqq \
         xrdp \
         xorgxrdp \
