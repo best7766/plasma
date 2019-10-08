@@ -1,13 +1,14 @@
 FROM kdeneon/plasma
 MAINTAINER best "https://github.com/best7766"
 ENV DEBIAN_FRONTEND noninteractive
+ENV HOME /root
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
-RUN cd /root && \
-    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
+ 
+RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
@@ -29,7 +30,6 @@ RUN cd /root && \
         ca-certificates \
         xterm \
         curl \
-        nano \
         nano \
         wget \
         gzip \
@@ -57,15 +57,6 @@ RUN cd /root && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
-    #echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
    
 RUN echo 'root:root123' |chpasswd
 RUN echo 'neon:root123' |chpasswd
